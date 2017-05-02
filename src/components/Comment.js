@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default Comment (props) {
-    const { comment } = props 
+export default function Comment (props) {
+    const { comment } = props;
     return(
-        {comment.text}
+        <p>{comment.text}</p>
     )
 }

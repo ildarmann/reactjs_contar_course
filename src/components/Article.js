@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import CommentList from './CommentList'
 
 class Article extends Component {
 
     constructor() {
-        super()
+        super();
         this.state = {
             isOpen: false
         }
@@ -11,11 +12,14 @@ class Article extends Component {
 
     render () {
         const {article} = this.props;
-        const body = this.state.isOpen ? <p>{article.text}</p> : null
+        const {comments} = article;
+        const bodyArticle = this.state.isOpen ? <p>{article.text}</p> : null;
+        const bodyComment = this.state.isOpen ? <CommentList comments = {comments} /> : null;
         return(
             <section>
                 <h3 onClick={this.handleClick}>{article.title}</h3>
-                {body}
+                {bodyArticle}
+                {bodyComment}
             </section>
         )
     }
@@ -28,6 +32,7 @@ class Article extends Component {
 }
 
 export default Article
+
 /*
 export default props => {
     const {article} = props;
