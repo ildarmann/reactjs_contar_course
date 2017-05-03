@@ -12,14 +12,10 @@ class Article extends Component {
 
     render () {
         const {article} = this.props;
-        const {comments} = article;
-        const bodyArticle = this.state.isOpen ? <p>{article.text}</p> : null;
-        const bodyComment = this.state.isOpen ? <CommentList comments = {comments} /> : null;
         return(
             <section>
-                <h3 onClick={this.handleClick}>{article.title}</h3>
-                {bodyArticle}
-                {bodyComment}
+                <h3 onClick = {this.handleClick} > {article.title} </h3>
+                {this.getBody()}
             </section>
         )
     }
@@ -28,6 +24,17 @@ class Article extends Component {
         this.setState({
             isOpen: !this.state.isOpen
         })
+    };
+
+    getBody() {
+        if (!this.state.isOpen) return null;
+        const {article} = this.props;
+        return(
+            <div>
+                <p>{article.text}</p>
+                <CommentList comments = {article.comments} />
+            </div>
+        )
     }
 }
 
