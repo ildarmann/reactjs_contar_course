@@ -22,5 +22,4 @@ Comment.propTypes = {
 /*
 
 TODO
-- Decorator
 - обратный поток данных*/

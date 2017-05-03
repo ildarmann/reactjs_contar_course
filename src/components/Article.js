@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
-import toggleOpen from '../decorators/toggleOpen'
 
 function Article(props) {
 
@@ -34,7 +33,7 @@ function getBody(props) {
     )
 }
 
-export default toggleOpen(Article)
+export default Article
 
 
 /*
