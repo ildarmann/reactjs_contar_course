@@ -1,44 +1,41 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
+import toggleOpen from '../decorators/toggleOpen'
 
-class Article extends Component {
+function Article(props) {
 
-    constructor() {
-        super();
-        this.state = {
-            isOpen: false
-        }
-    }
-
-    render () {
-        const {article} = this.props;
-        return(
-            <section>
-                <h3 onClick = {this.handleClick} > {article.title} </h3>
-                {this.getBody()}
-            </section>
-        )
-    }
-
-    handleClick = ev => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-    };
-
-    getBody() {
-        if (!this.state.isOpen) return null;
-        const {article} = this.props;
-        return(
-            <div>
-                <p>{article.text}</p>
-                <CommentList comments = {article.comments} />
-            </div>
-        )
-    }
+    const {article, toggleOpen} = props;
+    return(
+        <section>
+            <h3 onClick = {toggleOpen} > {article.title} </h3>
+            {getBody(props)}
+        </section>
+    )
 }
 
-export default Article
+
+Article.propTypes = {
+    article: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        comments: PropTypes.array,
+        text: PropTypes.string.isRequired
+    }).isRequired
+}
+
+function getBody(props) {
+    const {article, isOpen} = props;
+    if (!isOpen) return null;
+
+    return(
+        <div>
+            <p>{article.text}</p>
+            <CommentList comments = {article.comments} />
+        </div>
+    )
+}
+
+export default toggleOpen(Article)
+
 
 /*
 export default props => {

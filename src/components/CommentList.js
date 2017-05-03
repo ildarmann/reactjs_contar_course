@@ -1,14 +1,13 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import Comment from './Comment'
+import toggleOpen from '../decorators/toggleOpen'
 
 class CommentList extends Component {
 
-    constructor () {
-        super();
-        this.state = {
-            isOpen: false
-        }
+    static propTypes = {
+        comments: PropTypes.array
     }
+
 
     render () {
         return (
@@ -20,27 +19,22 @@ class CommentList extends Component {
         )
     }
 
-    handleClick  = ev => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-    };
 
     getButton() {
-        const {comments} = this.props;
+        const {comments, isOpen, toggleOpen} = this.props;
         if (!comments) return <span>комментариев нет</span>;
 
-        const commentsHeader = this.state.isOpen ?  'Скрыть комментарии' : 'Показать комментарии';
+        const commentsHeader = isOpen ?  'Скрыть комментарии' : 'Показать комментарии';
         return(
-            <a href='#' onClick={this.handleClick} > {commentsHeader} </a>
+            <a href='#' onClick={toggleOpen} > {commentsHeader} </a>
         )
     }
 
     getComments() {
-        const {comments} = this.props;
+        const {comments, isOpen} = this.props;
         if (!comments) return null;
 
-        if (!this.state.isOpen) return null;
+        if (!isOpen) return null;
 
         const items = comments.map(comment => <li key={comment.id}> <Comment comment = {comment}/>  </li>);
         return(
@@ -51,5 +45,5 @@ class CommentList extends Component {
     }
 }
 
-export default CommentList
+export default toggleOpen(CommentList)
 
