@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 
 export default function Comment (props) {
     const { title, user, text } = props.comment;
@@ -10,3 +10,16 @@ export default function Comment (props) {
         </div>
     )
 }
+
+Comment.propTypes = {
+    comment: PropTypes.shape({
+        title: PropTypes.string,
+        user: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired
+    }).isRequired
+}
+
+/*
+
+TODO
+- обратный поток данных*/
