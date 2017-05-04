@@ -1,27 +1,20 @@
 import React from 'react'
 
-export default (Component) => class AccordionArticle extends React.Component{
+export default (Component) => class AccordionDecorator extends React.Component{
 
     state = {
-        openArticleID: null,
-        isOpen: false
+        openItemID: null,
     };
 
     render(){
-        return <Component {...this.props} {...this.state} openArticle = {this.openArticle}/>
+        return <Component {...this.props} {...this.state} checkIsOpen = {this.checkIsOpen} toogleOpenItem = {this.toogleOpenItem}/>
     }
 
-    openArticle = id => ev => {
-        let openFlag;
-        if (this.state.openArticleID === id) {
-            openFlag = !this.state.isOpen
-        } else {
-            openFlag = true;
-        }
+    checkIsOpen = id => id == this.state.openItemID
 
+    toogleOpenItem = id => ev => {
         this.setState({
-            openArticleID: id,
-            isOpen: openFlag
+            openItemID: this.state.openItemID === id ? null : id
         })
     }
 }

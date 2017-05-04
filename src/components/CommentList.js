@@ -34,9 +34,7 @@ class CommentList extends Component {
 
     getComments() {
         const {comments, isOpen} = this.props;
-        if (!comments) return null;
-
-        if (!isOpen) return null;
+        if (!comments || !comments.length || !isOpen) return null;
 
         const items = comments.map(comment => <li key={comment.id}> <Comment comment = {comment}/>  </li>);
         return(

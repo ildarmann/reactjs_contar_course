@@ -4,14 +4,14 @@ import accordionArticle from '../decorators/accordionArticle'
 
 function ArticleList (props){
 
-        const { articles, openArticleID, isOpen, openArticle } = props;
+        const { articles, checkIsOpen, toogleOpenItem } = props;
 
         const  articleItems = articles.map(article => (
             <li key = {article.id}>
                 <Article
                     article = {article}
-                    isOpen = {article.id == openArticleID && isOpen}
-                    toggleOpen = {openArticle(article.id)}
+                    isOpen = {checkIsOpen(article.id)}
+                    toggleOpen = {toogleOpenItem(article.id)}
                 />
             </li>
         ));
@@ -26,9 +26,8 @@ function ArticleList (props){
 
 ArticleList.propTypes = {
     articles: PropTypes.array.isRequired,
-    openArticleID: PropTypes.string ,
-    isOpen: PropTypes.bool.isRequired,
-    openArticle: PropTypes.func.isRequired
+    checkIsOpen: PropTypes.func.isRequired,
+    toogleOpenItem: PropTypes.func.isRequired
 };
 
 
