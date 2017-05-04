@@ -10,7 +10,7 @@ export default (Component) => class AccordionDecorator extends React.Component{
         return <Component {...this.props} {...this.state} checkIsOpen = {this.checkIsOpen} toogleOpenItem = {this.toogleOpenItem}/>
     }
 
-    checkIsOpen = id => id == this.state.openItemID
+    checkIsOpen = id => id == this.state.openItemID;
 
     toogleOpenItem = id => ev => {
         this.setState({
