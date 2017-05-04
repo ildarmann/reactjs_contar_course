@@ -18,8 +18,9 @@ Article.propTypes = {
         title: PropTypes.string.isRequired,
         comments: PropTypes.array,
         text: PropTypes.string.isRequired
-    }).isRequired
-}
+    }).isRequired,
+    toggleOpen: PropTypes.func.isRequired
+};
 
 function getBody(props) {
     const {article, isOpen} = props;
